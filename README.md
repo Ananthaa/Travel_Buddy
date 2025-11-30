@@ -1,8 +1,13 @@
 # Travel Buddy - AI-Powered Travel Itinerary Generator
 
-Travel Buddy is an intelligent web application that generates personalized travel itineraries using Google's Gemini AI. The application features a beautiful, modern UI with multi-step forms, dynamic image generation, and PDF export capabilities.
+Travel Buddy is an AI-powered travel itinerary generator that uses Google’s Gemini models, an agent-based backend, and a polished web UI to turn user preferences into personalized travel plans that can be downloaded as PDFs.
 
-## Features
+## Problem Statement
+Planning a trip is time-consuming because travelers must research destinations, shortlist activities, balance budgets, and stitch everything into a day-by-day plan that fits their preferences and constraints. Many people end up with scattered notes across sites and screenshots, leading to generic or incomplete itineraries that are hard to refine once plans change.
+
+### Why agents?
+Travel planning is a multi-step workflow: collecting structured preferences, calling an LLM to design an itinerary, refining it with feedback, and finally packaging it into a shareable artifact like a PDF. An agent-based approach lets specialized components handle data collection, itinerary generation, coordination, and communication, making the system easier to extend with new capabilities like email delivery or booking integrations
+
 
 ### 🎯 Core Features
 - **AI-Powered Itinerary Generation**: Uses Google Gemini 2.0 Flash to create detailed, personalized travel plans
@@ -39,7 +44,7 @@ The application collects and considers:
 - **Markdown Rendering**: marked.js for rich text display
 - **Image Generation**: Pollinations.ai API
 
-## Project Structure
+## Project Architecture
 
 ```
 TravelBuddy/
@@ -62,11 +67,11 @@ TravelBuddy/
 └── README.md                  # This file
 ```
 
-## Installation
+## Installation Instructions
 
 ### Prerequisites
 - Python 3.8 or higher
-- Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
+- Google Gemini API key 
 
 ### Setup Steps
 
