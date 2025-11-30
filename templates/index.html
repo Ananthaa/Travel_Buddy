@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Buddy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <main class="container">
+        <header class="header">
+            <h1>Travel Buddy</h1>
+            <p>Let's craft your perfect itinerary.</p>
+        </header>
+
+        <form id="travelForm" class="glass-form">
+            <div class="form-step active" data-step="1">
+                <h2>Where to?</h2>
+                <div class="input-group">
+                    <label for="start_location">Starting From</label>
+                    <input type="text" id="start_location" name="start_location" placeholder="e.g., New York, London"
+                        required>
+                </div>
+                <div class="input-group">
+                    <label for="destination">Destination</label>
+                    <input type="text" id="destination" name="destination" placeholder="e.g., Paris, Tokyo, Bali"
+                        required>
+                </div>
+                <div class="input-group">
+                    <label for="travel_mode">Mode of Travel</label>
+                    <select id="travel_mode" name="travel_mode" required>
+                        <option value="" disabled selected>Select mode</option>
+                        <option value="Flight">Flight</option>
+                        <option value="Train">Train</option>
+                        <option value="Car">Car</option>
+                        <option value="Bus">Bus</option>
+                        <option value="Cruise">Cruise</option>
+                        <option value="Taxi">Taxi</option>
+                    </select>
+                </div>
+                <button type="button" class="btn-next">Next</button>
+            </div>
+
+            <div class="form-step" data-step="2">
+                <h2>Details</h2>
+                <div class="input-group">
+                    <label for="travel_date">When?</label>
+                    <input type="date" id="travel_date" name="travel_date" required>
+                </div>
+                <div class="input-group">
+                    <label for="duration">Duration (Days)</label>
+                    <input type="number" id="duration" name="duration" min="1" placeholder="e.g., 7" required>
+                </div>
+                <div class="input-group">
+                    <label for="travelers_count">Number of Travelers</label>
+                    <input type="number" id="travelers_count" name="travelers_count" min="1" placeholder="e.g., 2"
+                        required>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-prev">Back</button>
+                    <button type="button" class="btn-next">Next</button>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="3">
+                <h2>Preferences</h2>
+                <div class="input-group">
+                    <label for="budget">Budget</label>
+                    <select id="budget" name="budget" required>
+                        <option value="" disabled selected>Select your budget</option>
+                        <option value="Budget">Budget ($)</option>
+                        <option value="Standard">Standard ($$)</option>
+                        <option value="Luxury">Luxury ($$$)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="travel_style">Travel Style</label>
+                    <select id="travel_style" name="travel_style" required>
+                        <option value="" disabled selected>Select your style</option>
+                        <option value="Solo">Solo</option>
+                        <option value="Couple">Couple</option>
+                        <option value="Family">Family</option>
+                        <option value="Group">Group</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="food_habits">Food Habits</label>
+                    <select id="food_habits" name="food_habits" required>
+                        <option value="" disabled selected>Select preference</option>
+                        <option value="Vegetarian">Vegetarian</option>
+                        <option value="Non-Vegetarian">Non-Vegetarian</option>
+                        <option value="Vegan">Vegan</option>
+                    </select>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-prev">Back</button>
+                    <button type="button" class="btn-next">Next</button>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="4">
+                <h2>Final Touch</h2>
+                <div class="input-group">
+                    <label for="interests">Interests (comma separated)</label>
+                    <input type="text" id="interests" name="interests" placeholder="e.g., Food, History, Nature">
+                </div>
+                <div class="input-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="What should we call you?" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Where should we send the itinerary?"
+                        required>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-prev">Back</button>
+                    <button type="submit" class="btn-submit">Start Planning</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Itinerary Section (Hidden by default) -->
+        <section id="itinerary-section" class="glass-form" style="display: none; margin-top: 2rem;">
+            <img id="destination-collage" alt="Destination Collage" style="display: none;">
+            <div id="itinerary-content"></div>
+
+            <!-- Feedback Area (Hidden by default) -->
+            <div id="feedback-area" style="margin-top: 2rem; display: none;">
+                <h3 style="margin-bottom: 0.5rem;">Want to make changes?</h3>
+                <textarea id="feedback-input" placeholder="Tell us what you'd like to change..."
+                    style="width: 100%; padding: 1rem; margin-bottom: 1rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 5px; min-height: 100px;"></textarea>
+                <button id="btn-update-itinerary"
+                    style="background: linear-gradient(to right, #f59e0b, #d97706); width: 100%; margin-bottom: 1rem;">Update
+                    Itinerary</button>
+            </div>
+
+            <!-- Finalize Area (Hidden by default) -->
+            <div id="finalize-area"
+                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; display: none;">
+                <h3 style="margin-bottom: 0.5rem;">Happy with the plan?</h3>
+                <button id="btn-finalize"
+                    style="background: linear-gradient(to right, #10b981, #059669); width: 100%;">Finalize & Download
+                    PDF</button>
+            </div>
+
+            <!-- Download Area (Hidden by default) -->
+            <div id="download-area" style="margin-top: 1rem; display: none;">
+                <!-- Download link will be injected here -->
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
